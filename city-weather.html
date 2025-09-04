@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Api</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="city-weather.css">
+</head>
+<body>
+    <script>
+        //upper part
+        link = "https://api.openweathermap.org/data/2.5/weather?q=delhi&appid=32977ceffadad0ca3ac83a080bfee99e"
+        var request = new XMLHttpRequest;
+        request.open('GET',link,true);
+        request.onload = function(){
+            var obj = JSON.parse(this.response);
+            console.log(obj);
+            document.getElementById('weather').innerHTML=obj.weather[0].description;
+            document.getElementById('location').innerHTML = obj.name;
+            document.getElementById('temp').innerHTML = Math.round(obj.main.temp - 273.15);
+            document.getElementById('icon').src = "https://openweathermap.org/img/w/" + obj.weather[0].icon + ".png"; 
+        }
+
+        if(request.status>=200 && request.status < 400){
+            var temp=obj.main.temp;
+        }
+        else{
+            console.log("The city data are not present yet");
+        }
+        request.send();
+
+        //downword part
+        newlink = "https://api.openweathermap.org/data/2.5/weather?q=Jharkhand&appid=32977ceffadad0ca3ac83a080bfee99e"
+        var newrequest = new XMLHttpRequest;
+        newrequest.open('GET',newlink,true);
+        newrequest.onload = function(){
+            var newobj = JSON.parse(this.response);
+            console.log(newobj);
+            document.getElementById('n-weather').innerHTML=newobj.weather[0].description;
+            document.getElementById('n-location').innerHTML = newobj.name;
+            document.getElementById('n-temp').innerHTML = Math.round(newobj.main.temp - 273.15);
+            document.getElementById('n-icon').src = "https://openweathermap.org/img/w/" + newobj.weather[0].icon + ".png"; 
+        }
+
+        if(newrequest.status>=200 && newrequest.status < 400){
+            var newtemp=newobj.main.temp;
+        }
+        else{
+            console.log("The city data are not present yet");
+        }
+        newrequest.send();
+        
+    </script>
+    <div class="container">
+        
+        <div class="left-container">
+            <h2><i class="fa fa-map-marker"></i><span id="location"></span></h2>
+            <h6 id="weather"></h6>
+            <h4><span id="temp"></span><sup>o</sup>C</h4>
+            <img src="" id="icon">
+            <button onclick="window.location.reload()" class="refresh"><i class="fa fa-refresh"></i></button>
+        </div>
+        <div class="right-container">
+            <h2><i class="fa fa-map-marker"></i><span id="n-location"></span></h2>
+            <h6 id="n-weather"></h6>
+            <h4><span id="n-temp"></span><sup>o</sup>C</h4>
+            <img src="" id="n-icon">
+            <button onclick="window.location.reload()" class="refresh"><i class="fa fa-refresh"></i></button>
+        </div>
+    </div>
+
+</body>
+</html>
