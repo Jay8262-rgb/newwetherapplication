@@ -1,3 +1,3 @@
 # newwetherapplication
-fetch the weather data perticular city.
+fetch the weather data particular city.
 
